@@ -21,6 +21,7 @@ import com.fsck.k9.mailstore.StorageManager
 import com.fsck.k9.preferences.Storage
 import com.fsck.k9.preferences.StorageEditor
 import timber.log.Timber
+import java.util.Collections
 
 class AccountPreferenceSerializer(
     private val storageManager: StorageManager,
@@ -46,6 +47,7 @@ class AccountPreferenceSerializer(
             latestOldMessageSeenTime = storage.getLong("$accountUuid.latestOldMessageSeenTime", 0)
             isNotifyNewMail = storage.getBoolean("$accountUuid.notifyNewMail", false)
             setMuteMailingLists(storage.getBoolean("$accountUuid.muteMailingLists", false))
+            setMutedSenders(storage.getString("$accountUuid.mutedSenders", ""))
 
             folderNotifyNewMailMode = getEnumStringPref<FolderMode>(storage, "$accountUuid.folderNotifyNewMailMode", FolderMode.ALL)
             isNotifySelfNewMail = storage.getBoolean("$accountUuid.notifySelfNewMail", true)
@@ -257,6 +259,7 @@ class AccountPreferenceSerializer(
             editor.putLong("$accountUuid.latestOldMessageSeenTime", latestOldMessageSeenTime)
             editor.putBoolean("$accountUuid.notifyNewMail", isNotifyNewMail)
             editor.putBoolean("$accountUuid.muteMailingLists", getMuteMailingLists())
+            editor.putString("$accountUuid.mutedSenders", getMutedSendersAsString())
             editor.putString("$accountUuid.folderNotifyNewMailMode", folderNotifyNewMailMode.name)
             editor.putBoolean("$accountUuid.notifySelfNewMail", isNotifySelfNewMail)
             editor.putBoolean("$accountUuid.notifyContactsMailOnly", isNotifyContactsMailOnly)
@@ -569,6 +572,7 @@ class AccountPreferenceSerializer(
             accountNumber = UNASSIGNED_ACCOUNT_NUMBER
             isNotifyNewMail = true
             muteMailingLists = false
+            setMutedSenders(Collections.emptyList())
             folderNotifyNewMailMode = FolderMode.ALL
             isNotifySync = false
             isNotifySelfNewMail = true
