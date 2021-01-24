@@ -6,11 +6,12 @@ import java.util.List;
 
 import android.app.Application;
 import android.app.Notification;
+import android.os.Build;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationCompat.InboxStyle;
-
 import com.fsck.k9.Account;
 import com.fsck.k9.K9;
 import com.fsck.k9.K9.NotificationHideSubject;
@@ -22,6 +23,7 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import static com.fsck.k9.testing.MockHelper.mockBuilder;
 import static org.junit.Assert.assertEquals;
@@ -31,7 +33,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
 public class DeviceNotificationsTest extends RobolectricTest {
     private static final int UNREAD_MESSAGE_COUNT = 42;
     private static final int NEW_MESSAGE_COUNT = 2;

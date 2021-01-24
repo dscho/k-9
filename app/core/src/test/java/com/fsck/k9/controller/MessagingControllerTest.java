@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.fsck.k9.Account;
 import com.fsck.k9.AccountPreferenceSerializer;
@@ -51,6 +52,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLog;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -69,6 +71,7 @@ import static org.mockito.Mockito.when;
 
 
 @SuppressWarnings("unchecked")
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
 public class MessagingControllerTest extends K9RobolectricTest {
     private static final long FOLDER_ID = 23;
     private static final String FOLDER_NAME = "Folder";
