@@ -45,6 +45,7 @@ class AccountPreferenceSerializer(
             }
             latestOldMessageSeenTime = storage.getLong("$accountUuid.latestOldMessageSeenTime", 0)
             isNotifyNewMail = storage.getBoolean("$accountUuid.notifyNewMail", false)
+            setMuteMailingLists(storage.getBoolean("$accountUuid.muteMailingLists", false))
 
             folderNotifyNewMailMode = getEnumStringPref<FolderMode>(storage, "$accountUuid.folderNotifyNewMailMode", FolderMode.ALL)
             isNotifySelfNewMail = storage.getBoolean("$accountUuid.notifySelfNewMail", true)
@@ -255,6 +256,7 @@ class AccountPreferenceSerializer(
             editor.putInt("$accountUuid.displayCount", displayCount)
             editor.putLong("$accountUuid.latestOldMessageSeenTime", latestOldMessageSeenTime)
             editor.putBoolean("$accountUuid.notifyNewMail", isNotifyNewMail)
+            editor.putBoolean("$accountUuid.muteMailingLists", getMuteMailingLists())
             editor.putString("$accountUuid.folderNotifyNewMailMode", folderNotifyNewMailMode.name)
             editor.putBoolean("$accountUuid.notifySelfNewMail", isNotifySelfNewMail)
             editor.putBoolean("$accountUuid.notifyContactsMailOnly", isNotifyContactsMailOnly)
@@ -566,6 +568,7 @@ class AccountPreferenceSerializer(
             displayCount = K9.DEFAULT_VISIBLE_LIMIT
             accountNumber = UNASSIGNED_ACCOUNT_NUMBER
             isNotifyNewMail = true
+            muteMailingLists = false
             folderNotifyNewMailMode = FolderMode.ALL
             isNotifySync = false
             isNotifySelfNewMail = true
