@@ -5,7 +5,7 @@ buildscript {
                 'targetSdk': 29,
                 'minSdk': 21,
                 'buildTools': '29.0.3',
-                'robolectricSdk': 29
+                'robolectricSdk': 30
         ]
 
         versions = [
